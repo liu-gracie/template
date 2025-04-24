@@ -2,21 +2,142 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Harvest</title>
-  <link rel="stylesheet" href="harvest.css" />
+  <title>Harvest Flip Card</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #fdfcf6;
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    h1, h2 {
+      color: #4d4d4d;
+    }
+    
+    a {
+      color: #2a7ae2;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    .image {
+      width: 300px;
+      height: auto;
+      border: 3px solid #555;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin: 20px 0;
+    }
+    
+    /* Card flip styling */
+    .card-container {
+      width: 600px;
+      height: 500px;
+      perspective: 1000px;
+      margin: 50px auto;
+    }
+    
+    .card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+      cursor: pointer;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+    }
+    
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+    
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    .card-front {
+      background-color: #f8f5e6;
+      border: 5px solid #8b7355;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .card-back {
+      background-color: #f8f5e6;
+      border: 5px solid #8b7355;
+      transform: rotateY(180deg);
+      overflow-y: auto;
+    }
+    
+    .title-container {
+      text-align: center;
+    }
+    
+    .flip-instruction {
+      font-size: 14px;
+      color: #777;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Harvest</h1>
-    <p>
-      On a small scale, potatoes can be harvested using a hoe or spade, or simply by hand. Commercial harvesting is done with large potato harvesters, which scoop up the plant and surrounding earth. This is transported up an apron chain consisting of steel links several feet wide, which separates some of the earth. The chain deposits into an area where further separation occurs. The most complex designs use vine choppers and shakers, along with a blower system to separate the potatoes from the plant. The result is then usually run past workers who continue to sort out plant material, stones, and rotten potatoes before the potatoes are continuously delivered to a wagon or truck. Further inspection and separation occurs when the potatoes are unloaded from the field vehicles and put into storage.
-    </p>
-    <p>
-      Potatoes are usually cured after harvest to improve skin-set. Skin-set is the process by which the skin of the potato becomes resistant to skinning damage. Potato tubers may be susceptible to skinning at harvest and suffer skinning damage during harvest and handling operations. Curing allows the skin to fully set and any wounds to heal. Wound-healing prevents infection and water-loss from the tubers during storage. Curing is normally done at relatively warm temperatures (10 to 16 °C or 50 to 60 °F) with high humidity and good gas-exchange if at all possible.
-    </p>
-    <img src="images/4.jpg" alt="potato" class="image">
-    <h5>A modern potato harvester.</h5>
-    <a href="index.html">← Back to Contents</a>
+    <div class="card-container">
+      <div class="card">
+        <div class="card-face card-front">
+          <div class="title-container">
+            <h1>Harvest</h1>
+            <p class="flip-instruction">(Click to flip)</p>
+          </div>
+        </div>
+        <div class="card-face card-back">
+          <div class="content">
+            <h1>Harvest</h1>
+            <p>
+              On a small scale, potatoes can be harvested using a hoe or spade, or simply by hand. Commercial harvesting is done with large potato harvesters, which scoop up the plant and surrounding earth. This is transported up an apron chain consisting of steel links several feet wide, which separates some of the earth. The chain deposits into an area where further separation occurs. The most complex designs use vine choppers and shakers, along with a blower system to separate the potatoes from the plant. The result is then usually run past workers who continue to sort out plant material, stones, and rotten potatoes before the potatoes are continuously delivered to a wagon or truck. Further inspection and separation occurs when the potatoes are unloaded from the field vehicles and put into storage.
+            </p>
+            <p>
+              Potatoes are usually cured after harvest to improve skin-set. Skin-set is the process by which the skin of the potato becomes resistant to skinning damage. Potato tubers may be susceptible to skinning at harvest and suffer skinning damage during harvest and handling operations. Curing allows the skin to fully set and any wounds to heal. Wound-healing prevents infection and water-loss from the tubers during storage. Curing is normally done at relatively warm temperatures (10 to 16 °C or 50 to 60 °F) with high humidity and good gas-exchange if at all possible.
+            </p>
+            <img src="/api/placeholder/300/200" alt="potato" class="image">
+            <h5>A modern potato harvester.</h5>
+            <p class="flip-instruction">(Click to flip back)</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <script>
+    document.querySelector('.card').addEventListener('click', function() {
+      this.classList.toggle('flipped');
+    });
+  </script>
 </body>
 </html>
