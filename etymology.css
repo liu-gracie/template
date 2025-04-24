@@ -31,3 +31,17 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
+
+  /* Add hover effect to make text bigger */
+p, h1, h2, h5, a {
+  transition: font-size 0.3s ease;
+}
+
+p:hover, h1:hover, h2:hover, h5:hover, a:hover {
+  font-size: 1.3em; /* Increase text size on hover */
+}
+
+/* Optional: Add some padding to prevent layout shifts */
+p, h1, h2, h5, a {
+  padding: 5px;
+}
