@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #fdfcf6;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  h1, h2 {
+    color: #4d4d4d;
+  }
+  
+  a {
+    color: #2a7ae2;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .image {
+    width: 300px;
+    height: auto;
+    border: 3px solid #555;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
