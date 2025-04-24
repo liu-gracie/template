@@ -2,24 +2,311 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Phases of Growth</title>
-  <link rel="stylesheet" href="growth.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phases of Potato Growth</title>
+  <style>
+    :root {
+      --primary-color: #4CAF50;
+      --secondary-color: #8BC34A;
+      --accent-color: #FFC107;
+      --text-color: #333;
+      --light-bg: #f9f9f9;
+      --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-color);
+      background-color: var(--light-bg);
+      line-height: 1.6;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 20px 0;
+      border-radius: 0 0 20px 20px;
+      margin-bottom: 30px;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    h1::after {
+      content: "🥔";
+      position: absolute;
+      top: -10px;
+      right: -40px;
+      font-size: 1.5rem;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    .phase-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .phase-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .phase-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+    
+    .phase-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background-color: var(--accent-color);
+    }
+    
+    .phase-title {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+    
+    .image-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+    
+    .image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.3s ease;
+    }
+    
+    .image:hover {
+      transform: scale(1.02);
+    }
+    
+    .caption {
+      margin-top: 10px;
+      font-style: italic;
+      color: #666;
+    }
+    
+    .fun-facts {
+      background-color: #E8F5E9;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 30px 0;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+    
+    .fun-facts h2 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+    
+    .fun-facts::before {
+      content: "💡";
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      font-size: 2rem;
+    }
+    
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .back-link:hover {
+      background-color: var(--secondary-color);
+      transform: scale(1.05);
+      text-decoration: none;
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px 0;
+      border-top: 1px solid #ddd;
+      color: #666;
+    }
+    
+    .progress-container {
+      width: 100%;
+      height: 8px;
+      background: #f1f1f1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    
+    .progress-bar {
+      height: 8px;
+      background: var(--accent-color);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+      
+      .phase-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .container {
+        width: 95%;
+        padding: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Phases of Growth</h1>
-    <p>
-      Potato growth can be divided into five phases. During the first phase, sprouts emerge from the seed potatoes and root growth begins. During the second, photosynthesis begins as the plant develops leaves and branches above-ground and stolons develop from lower leaf axilson the below-ground stem. In the third phase the tips of the stolons swell, forming new tubers, and the shoots continue to grow, with flowers typically developing soon after. Tuber bulking occurs during the fourth phase, when the plant begins investing the majority of its resources in its newly formed tubers. At this phase, several factors are critical to a good yield: optimal soil moisture and temperature, soil nutrient availability and balance, and resistance to pest attacks. The fifth phase is the maturation of the tubers: the leaves and stems senesce and the tuber skins harden. 
-    </p>
-    <p>
-      New tubers may start growing at the surface of the soil. Since exposure to light leads to an undesirable greening of the skins and the development of solanine as a protection from the sun's rays, growers cover surface tubers. Commercial growers cover them by piling additional soil around the base of the plant as it grows (called "hilling" up, or in British English "earthing up"). An alternative method, used by home gardeners and smaller-scale growers, involves covering the growing area with mulches such as straw or plastic sheets. 
-    </p>
-    <p>
-      At farm scale, potatoes require a well-drained neutral or mildly acidic soil (pH 6 or 7) such as a sandy loam. The soil is prepared using deep tillage, for example with a chisel plow or ripper. In areas where irrigation is needed, the field is leveled using a landplane so that water can be supplied evenly. Manure can be added after initial irrigation; the soil is then broken up with a disc harrow. The potatoes are planted using a potato planter machine in rows 80 centimetres (31 in) apart. At garden scale, potatoes are planted in trenches or individual holes some 15 centimetres (5.9 in) deep in soil, preferably with additional organic matter such as garden compost or manure. Alternatively, they can be planted in containers or bags filled with a free-draining compost. Potatoes are sensitive to heavy frosts, which damage them in the ground or when stored.
-    </p>
-    <img src="images/3.jpg" alt="potato" class="image">
-    <h5>Immature potato plants.</h5>
-    <a href="index.html">← Back to Contents</a>
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
   </div>
+
+  <header>
+    <div class="container">
+      <h1>Phases of Potato Growth</h1>
+      <p class="subtitle">Discover the fascinating journey from seed to harvest</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="phase-cards">
+      <div class="phase-card">
+        <h2 class="phase-title">Phase 1: Sprouting</h2>
+        <p>During the first phase, sprouts emerge from the seed potatoes and root growth begins. This initial growth sets the foundation for a healthy potato plant.</p>
+      </div>
+      
+      <div class="phase-card">
+        <h2 class="phase-title">Phase 2: Vegetative Growth</h2>
+        <p>Photosynthesis begins as the plant develops leaves and branches above-ground. Below the soil, stolons develop from lower leaf axils on the underground stem.</p>
+      </div>
+      
+      <div class="phase-card">
+        <h2 class="phase-title">Phase 3: Tuber Formation</h2>
+        <p>The tips of the stolons swell, forming new tubers, and the shoots continue to grow. Flowers typically develop soon after this phase begins.</p>
+      </div>
+      
+      <div class="phase-card">
+        <h2 class="phase-title">Phase 4: Tuber Bulking</h2>
+        <p>The plant begins investing the majority of its resources in its newly formed tubers. Optimal soil moisture, temperature, nutrient availability, and pest resistance are critical for a good yield.</p>
+      </div>
+      
+      <div class="phase-card">
+        <h2 class="phase-title">Phase 5: Maturation</h2>
+        <p>The leaves and stems senesce and the tuber skins harden. The potatoes are now preparing for harvest and long-term storage.</p>
+      </div>
+    </div>
+
+    <div class="image-container">
+      <img src="images/3.jpg" alt="Immature potato plants" class="image">
+      <p class="caption">Immature potato plants showing early development stages.</p>
+    </div>
+
+    <div class="fun-facts">
+      <h2>Growing Tips & Facts</h2>
+      <p>New tubers may start growing at the surface of the soil. Since exposure to light leads to an undesirable greening of the skins and the development of solanine as a protection from the sun's rays, growers cover surface tubers.</p>
+      <p>Commercial growers cover them by piling additional soil around the base of the plant as it grows (called "hilling" up, or in British English "earthing up"). An alternative method, used by home gardeners and smaller-scale growers, involves covering the growing area with mulches such as straw or plastic sheets.</p>
+      <p>At farm scale, potatoes require a well-drained neutral or mildly acidic soil (pH 6 or 7) such as a sandy loam. The soil is prepared using deep tillage, for example with a chisel plow or ripper.</p>
+    </div>
+
+    <a href="index.html" class="back-link">← Back to Contents</a>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 Potato Growth Guide | All rights reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll progress bar
+    window.onscroll = function() {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+    };
+    
+    // Add animation to cards on load
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.phase-card');
+      cards.forEach((card, index) => {
+        setTimeout(() => {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 100);
+        }, index * 150);
+      });
+    });
+  </script>
 </body>
 </html>
